@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.1.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -15,8 +15,11 @@ gem 'omniauth'
 # Use CanCan for permission managing
 gem 'cancan'
 
+# Use Kaminari for paginative
+gem 'kaminari'
+
 # Use Slim as renderer for HTML
-gem 'slim'
+gem 'slim-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
