@@ -1,28 +1,35 @@
-.theme
+body.theme
 {
-				.container {
-								width: 915px;
-								margin: 0px auto;
-				}
-				@media only screen and (min-width: 998px)
-				{
-								.container {
-												width: auto;
-												padding: 0% 8%;
-								}
-				}
-				@media only screen and (max-width: 1725px)
-				{
-								.container {
-												margin-left: 8em;
-												margin-right: 8em;
-								}
-				}
-				.ui.inverted.blue.menu
-				{
-								&, &.pointing .active.item:after
-								{
-												background-color: #00A2E2;
-								}
-				}
+	.container {
+		width: 915px;
+		margin: 0px auto;
+	}
+	@media only screen and (min-width: 998px)
+	{
+		.container {
+			width: auto;
+			padding: 0% 8%;
+		}
+	}
+	@media only screen and (max-width: 1725px)
+	{
+		.container {
+			margin-left: 8em;
+			margin-right: 8em;
+		}
+	}
+	.ui.menu
+	{
+		&.fixed + *
+		{
+			padding-top: 3em;
+		}
+		&.inverted.blue
+		{
+			&, &.pointing .active.item:after
+			{
+				background-color: #00A2E2;
+			}
+		}
+	}
 }
