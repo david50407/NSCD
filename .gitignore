@@ -17,3 +17,6 @@
 
 # Ignore vim tempfiles.
 .*.swp
+
+# Ignore Unicorn config
+config/unicorn.rb
