@@ -18,10 +18,11 @@ div.ui.grid
         = link_to issues_path(status: 'closed'), class: 'ui button' << actived?(@status == :is_close) do
           = semantic_icon :checkmark
           | 已結案
-      div.ui.floated.right.small.buttons
-        = link_to new_issue_path, class: 'ui green button' do
-          = semantic_icon :add
-          | 新增待辦
+      - if can? :create, Issue
+        div.ui.floated.right.small.buttons
+          = link_to new_issue_path, class: 'ui green button' do
+            = semantic_icon :add
+            | 新增待辦
     div.ui.basic.vertical.segment
       div.ui.relaxed.selection.animated.celled.list
         - @issues.each do |issue|

@@ -1,8 +1,21 @@
 div.ui.menu.blue.inverted.pointing.fixed
   div.container
-    a.item
-      = semantic_icon :home
-      | NSCD
-    = link_to issues_path, class: "item" << actived?(params[:controller] == "issues") do
-      = semantic_icon :attention
-      | 待辦事項
+    div.menu
+      a.item
+        = semantic_icon :home
+        | NSCD
+      = link_to issues_path, class: "item" << actived?(params[:controller] == "issues") do
+        = semantic_icon :attention
+        | 待辦事項
+      div.right.menu
+        - if current_user.blank?
+          = link_to new_user_session_path, class: 'item'
+            | 登入
+        - else
+          div.item.ui.simple.dropdown
+            = semantic_icon :user
+            = current_user.email
+            = semantic_icon :dropdown
+            div.menu
+              = link_to destroy_user_session_path, class: 'item'
+                | 登出
