@@ -3,6 +3,6 @@ div.ui.menu.blue.inverted.pointing.fixed
     a.item
       = semantic_icon :home
       | NSCD
-    = link_to issues_path, class: "item" << (" active" if params[:controller] == "issues") do
+    = link_to issues_path, class: "item" << actived?(params[:controller] == "issues") do
       = semantic_icon :attention
       | 待辦事項
