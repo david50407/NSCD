@@ -1,0 +1,39 @@
+div.ui.grid
+  div.sixteen.wide.column
+    div.ui.raised.segment
+      h2.ui.header
+        div.ui.right.corner.label
+          div.text
+            | ##{@issue.id}
+        - if @issue.opened?
+          div.ui.red.ribbon.label
+            | 待處理
+        - else
+          div.ui.blue.ribbon.label
+            | 已結案
+        = @issue.title
+      img.ui.tiny.avatar.image src='http://placehold.it/32'
+      = @issue.creator.email
+      |  建立於 #{timeago_tag @issue.created_at, :format => :short}
+  div.twelve.wide.column
+    div.ui.comments
+      - @issue.comments.each do |comment|
+        div.comment
+          a.avatar
+            img src='http://placehold.it/32'
+          div.content
+            a.author
+              = comment.author.email
+            div.metadata
+              = timeago_tag comment.created_at, :format => :short
+            div.text
+              div.ui.segment
+                = comment.content
+  div.four.wide.column
+    div.ui.vertical.segment
+      h5.ui.header
+        | 標籤
+      div.ui.labels
+        - @issue.labels.each do |label|
+          a.ui.label class="#{label.color || 'black'}"
+            = label.name

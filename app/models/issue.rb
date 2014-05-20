@@ -1,7 +1,7 @@
 class Issue < ActiveRecord::Base
-  has_one :creator, class_name: 'User',
-                    foreign_key: 'creator_id'
-  has_many :labels, class_name: 'IssueLabel'
-  has_many :comments, class_name: 'IssueComment'
+  belongs_to :creator, class_name: 'User'
+	has_many :label_ships
+  has_many :labels, :through => :label_ships
+  has_many :comments
 	enum status: [ :opened, :closed ]
 end

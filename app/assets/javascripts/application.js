@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require rails-timeago
+//= require locales/jquery.timeago.zh-TW.js
 //= require semantic-ui
 //= require_tree .

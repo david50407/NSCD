@@ -1,3 +1,39 @@
-- @issues.each do |issue|
-  = issue.title
-= paginate @issues
+div.ui.grid
+  div.four.wide.column
+    div.ui.vertical.segment
+      h5.ui.header
+        | 標籤
+      div.ui.animated.selection.list
+        - @labels.each do |label|
+          a.item
+            div.ui.large.circular.label class="#{label.color || 'black'}"
+            | &nbsp;
+            = label.name
+  div.twelve.wide.column
+    div
+      div.ui.small.buttons
+        div.ui.button
+          = semantic_icon :exclamation
+          | 待處理
+        div.ui.button
+          = semantic_icon :checkmark
+          | 已結案
+    div.ui.basic.vertical.segment
+      div.ui.relaxed.selection.animated.celled.list
+        - @issues.each do |issue|
+          = link_to issue, class: 'item' do
+            img.ui.avatar.image src='http://placehold.it/32'
+            div.content
+              div.header.ui.blue
+                = issue.title
+                - issue.labels.each do |label|
+                  | &nbsp;
+                  span.ui.small.label class="#{label.color || 'black'}"
+                    = label.name
+              div.ui.right.corner.label
+                div.text
+                  | ##{issue.id}
+              div.description.ui.font.small
+                = issue.creator.email
+                |  建立於 #{timeago_tag issue.created_at, :format => :short}
+    = paginate @issues

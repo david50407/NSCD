@@ -21,6 +21,7 @@ module NSCD
     # config.i18n.default_locale = :de
     # Set all translations from config/locales/**/*.rb,yml
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+		config.i18n.available_locales = ['zh-TW'.to_sym, :zh]
     config.i18n.default_locale = 'zh-TW'.to_sym
   end
 end

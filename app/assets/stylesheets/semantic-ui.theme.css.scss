@@ -1,5 +1,9 @@
 body.theme
 {
+	a {
+		color: #009FDA;
+		text-decoration: none;
+	}
 	.container {
 		width: 915px;
 		margin: 0px auto;
@@ -30,6 +34,17 @@ body.theme
 			{
 				background-color: #00A2E2;
 			}
+		}
+	}
+	.ui.font
+	{
+		&.small
+		{
+			font-size: .875em;
+		}
+		&.large 
+		{
+			font-size: 1.125em;
 		}
 	}
 }
