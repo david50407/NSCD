@@ -14,7 +14,12 @@ NSCD::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-	resources :issues
+	resources :issues do
+		member do
+			get 'close'
+			get 'open'
+		end
+	end
 
   # Example resource route with options:
   #   resources :products do

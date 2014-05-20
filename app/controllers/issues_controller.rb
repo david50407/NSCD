@@ -1,7 +1,6 @@
 class IssuesController < ApplicationController
   def index
-		@status = (params[:status] || :opened).to_sym
-		@status = :opened unless [:closed, :opened].include? @status
+		@status = params[:status] == 'closed' ? :is_close : :is_open
 		@labels = Issue::Label.all
 		@issues = Issue.where(status: Issue.statuses[@status]).page params[:page]
   end
@@ -29,6 +28,30 @@ class IssuesController < ApplicationController
 			Issue::Label.find id unless id.empty?
 		end - [nil]
 		redirect_to issue
+	end
+
+	def close
+		@issue = Issue.find params[:id]
+		if @issue.is_open?
+			@issue.is_close!
+			@issue.comments << Issue::Comment.create do |c|
+				c.author = current_user
+				c.is_close!
+			end
+		end
+		redirect_to @issue
+	end
+
+	def open
+		@issue = Issue.find params[:id]
+		if @issue.is_close?
+			@issue.is_open!
+			@issue.comments << Issue::Comment.create do |c|
+				c.author = current_user
+				c.is_open!
+			end
+		end
+		redirect_to @issue
 	end
 
 	def post_params

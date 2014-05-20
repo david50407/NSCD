@@ -5,7 +5,7 @@ div.ui.grid
         div.ui.right.corner.label
           div.text
             | ##{@issue.id}
-        - if @issue.opened?
+        - if @issue.is_open?
           div.ui.red.ribbon.label
             | 待處理
         - else
@@ -18,17 +18,30 @@ div.ui.grid
   div.twelve.wide.column
     div.ui.comments
       - @issue.comments.each do |comment|
-        div.comment
-          a.avatar
-            img src='http://placehold.it/32'
-          div.content
+        - if comment.is_comment?
+          div.comment
+            a.avatar
+              img src='http://placehold.it/32'
+            div.content
+              a.author
+                = comment.author.email
+              div.metadata
+                = timeago_tag comment.created_at, :format => :short
+              div.text
+                div.ui.segment
+                  = comment.content
+        - elsif comment.is_open?
+          div.ui.tiny.inverted.red.block.header
+            img.ui.tiny.avatar.image src='http://placehold.it/32'
             a.author
               = comment.author.email
-            div.metadata
-              = timeago_tag comment.created_at, :format => :short
-            div.text
-              div.ui.segment
-                = comment.content
+            |  於#{timeago_tag comment.created_at, :format => :short}翻案
+        - else
+          div.ui.tiny.inverted.green.block.header
+            img.ui.tiny.avatar.image src='http://placehold.it/32'
+            a.author
+              = comment.author.email
+            |  於#{timeago_tag comment.created_at, :format => :short}結案
   div.four.wide.column
     div.ui.vertical.segment
       h5.ui.header
@@ -37,3 +50,10 @@ div.ui.grid
         - @issue.labels.each do |label|
           a.ui.label class="#{label.color || 'black'}"
             = label.name
+  div.sixteen.wide.column
+    div.ui.divider
+    div.ui.form
+      = link_to close_issue_path(@issue), class: 'ui floated right green submit button'
+        | 結案
+      = link_to open_issue_path(@issue), class: 'ui floated right red submit button'
+        | 翻案

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520061401) do
+ActiveRecord::Schema.define(version: 20140520150931) do
 
   create_table "issue_comments", force: true do |t|
     t.integer  "issue_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140520061401) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",     default: 0
   end
 
   create_table "issue_label_ships", force: true do |t|

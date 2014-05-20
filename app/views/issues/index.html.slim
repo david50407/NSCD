@@ -12,10 +12,10 @@ div.ui.grid
   div.twelve.wide.column
     div
       div.ui.small.buttons
-        = link_to issues_path, class: 'ui button' << actived?(@status == :opened) do
+        = link_to issues_path, class: 'ui button' << actived?(@status == :is_open) do
           = semantic_icon :exclamation
           | 待處理
-        = link_to issues_path(status: 'closed'), class: 'ui button' << actived?(@status == :closed) do
+        = link_to issues_path(status: 'closed'), class: 'ui button' << actived?(@status == :is_close) do
           = semantic_icon :checkmark
           | 已結案
       div.ui.floated.right.small.buttons
