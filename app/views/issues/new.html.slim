@@ -1,0 +1,42 @@
+= form_for @issue do |f|
+  div.ui.grid
+    div.sixteen.wide.column
+      div.ui.form.raised.segment
+        div.ui.tiny.header
+          / div.ui.red.ribbon.label
+          /   | 待處理
+          div.ui.input
+            = f.text_field :title, placeholder: '標題'
+            div.ui.corner.label
+              = semantic_icon :asterisk
+        img.ui.tiny.avatar.image src='http://placehold.it/32'
+        = @issue.creator.email
+        |  建立於 現在
+    div.twelve.wide.column
+      div.ui.form.comments
+        div.comment
+          a.avatar
+            img src='http://placehold.it/32'
+          div.content
+            a.author
+              = @issue.creator.email
+            div.text
+              = f.fields_for :comment do |comment|
+                = comment.text_area :content, placeholder: '詳細說明……'
+    div.four.wide.column
+      div.ui.vertical.segment
+        h5.ui.header
+          | 標籤
+        div.ui.list
+          / = f.fields_for :labels do |l|
+          = f.collection_check_boxes :labels, Issue::Label.all, :id, :name do |b|
+            div.item
+              div.ui.checkbox
+                = b.check_box
+                = b.label
+                  span.ui.small.label class="#{b.object.color || 'black'}"
+                    = b.text
+    div.sixteen.wide.column
+      div.ui.divider
+      div.ui.form
+        = f.submit '送出', class: 'ui floated right blue submit button'
