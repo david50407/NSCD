@@ -50,10 +50,13 @@ div.ui.grid
         - @issue.labels.each do |label|
           a.ui.label class="#{label.color || 'black'}"
             = label.name
-  div.sixteen.wide.column
-    div.ui.divider
-    div.ui.form
-      = link_to close_issue_path(@issue), class: 'ui floated right green submit button'
-        | 結案
-      = link_to open_issue_path(@issue), class: 'ui floated right red submit button'
-        | 翻案
+  - if can? :modify, Issue
+    div.sixteen.wide.column
+      div.ui.divider
+      div.ui.form
+        - if @issue.is_open?
+          = link_to close_issue_path(@issue), class: 'ui floated right green submit button'
+            | 結案
+        - else
+          = link_to open_issue_path(@issue), class: 'ui floated right red submit button'
+            | 翻案
