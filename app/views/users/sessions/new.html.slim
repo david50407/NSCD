@@ -1,0 +1,44 @@
+div.ui.basic.segment
+div.ui.piled.segment
+  div.ui.basic.segment
+  h2.ui.center.aligned.header
+    | NSCD
+  h4.ui.center.aligned.disabled.header
+    | Need Some Cool Description
+  div.ui.section.divider
+  div.ui.two.column.divided.grid
+    div.column
+      div.ui.floating.blue.message
+        | 歡迎來到 NSCD 活動管理系統
+      div.ui.floating.yellow.message
+        | 進行任何操作之前請先登入
+    div.column
+      h2.ui.center.aligned.header
+        | 登入
+      = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+        div.ui.form
+          div.field
+            = f.label :email
+              | E-mail
+            div.ui.left.labeled.icon.input
+              = f.email_field :email, autofocus: true
+              = semantic_icon :mail
+              div.ui.corner.label
+                = semantic_icon :asterisk
+          div.field
+            = f.label :password
+              | 密碼
+            div.ui.left.labeled.icon.input
+              = f.password_field :password
+              = semantic_icon :lock
+              div.ui.corner.label
+                = semantic_icon :asterisk
+          - if devise_mapping.rememberable?
+            div.inline.field
+              div.ui.toggle.checkbox
+                = f.check_box :remember_me
+                = f.label :remember_me
+                  | 記住我（請勿在公用電腦啓用）
+          = f.submit "登入", class: "ui blue submit button"
+          = render "users/shared/links"
+  div.ui.basic.segment

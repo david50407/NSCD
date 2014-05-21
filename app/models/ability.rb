@@ -31,7 +31,7 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 		if user.blank?
 			cannot :manage, :all
-			basic_readonly
+			# basic_readonly
 		else
 			can :manage, :all
 		end

@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 	check_authorization :unless => :devise_controller?
 
 	rescue_from CanCan::AccessDenied do |exception|
-		redirect_to root_url, :alert => exception.message
+		if current_user.blank?
+			redirect_to new_user_session_url, :alert => exception.message
+		else
+			redirect_to root_url, :alert => exception.message
+		end
 	end
 end

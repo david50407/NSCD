@@ -20,3 +20,6 @@
 
 # Ignore Unicorn config
 config/unicorn.rb
+
+# Ignore rvm setting 
+.ruby-version
