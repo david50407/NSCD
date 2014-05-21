@@ -20,6 +20,9 @@ NSCD::Application.routes.draw do
 			get 'close'
 			get 'open'
 		end
+		scope :module => :issues do
+			resources :comments
+		end
 	end
 
   # Example resource route with options:

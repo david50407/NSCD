@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+	authorize_resource
   def index
 		@status = params[:status] == 'closed' ? :is_close : :is_open
 		@labels = Issue::Label.all

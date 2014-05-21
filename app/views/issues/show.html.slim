@@ -42,6 +42,8 @@ div.ui.grid
             a.author
               = comment.author.email
             |  於#{timeago_tag comment.created_at, :format => :short}結案
+      - if can? :create, Issue::Comment
+        = render :partial => 'comment'
   div.four.wide.column
     div.ui.vertical.segment
       h5.ui.header
