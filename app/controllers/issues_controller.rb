@@ -1,9 +1,28 @@
 class IssuesController < ApplicationController
 	authorize_resource
   def index
-		@status = params[:status] == 'closed' ? :is_close : :is_open
+		@status = params[:status] == 'closed' ? 'closed' : 'opened'
+		status = @status == 'closed' ? :is_close : :is_open
+		@sort = params[:sort] || 'newest'
+		@sort = 'newest' unless %W(newest oldest newest_update oldest_update).include? @sort
+		sort = case @sort.to_s.to_sym
+						when :newest
+							{:created_at => :desc}
+						when :oldest
+							{:created_at => :asc}
+						when :newest_update
+							{:updated_at => :desc}
+						when :oldest_update
+							{:updated_at => :asc}
+						#when :most_comments
+						#	{:comments_count => :desc}
+						#when :least_comments
+						#	{:comments_count => :desc}
+						else
+							{:created_at => :desc}
+						end
 		@labels = Issue::Label.all
-		@issues = Issue.where(status: Issue.statuses[@status]).page params[:page]
+		@issues = Issue.where(status: Issue.statuses[status]).order(sort).page params[:page]
   end
 
 	def show

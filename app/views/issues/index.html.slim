@@ -12,12 +12,34 @@ div.ui.grid
   div.twelve.wide.column
     div
       div.ui.small.buttons
-        = link_to issues_path, class: 'ui button' << actived?(@status == :is_open) do
+        = link_to issues_path(sort: @sort), class: 'ui button' << actived?(@status == 'opened') do
           = semantic_icon :exclamation
           | 待處理
-        = link_to issues_path(status: 'closed'), class: 'ui button' << actived?(@status == :is_close) do
+        = link_to issues_path(status: 'closed', sort: @sort), class: 'ui button' << actived?(@status == 'closed') do
           = semantic_icon :checkmark
           | 已結案
+      | &nbsp;
+      div.ui.small.buttons
+        div.ui.dropdown.right.attached.labeled.icon.button
+          = semantic_icon :sort
+          | 排序：
+          = '最新' if @sort == 'newest'
+          = '最舊' if @sort == 'oldest'
+          = '最近動態' if @sort == 'newest_update'
+          = '最早動態' if @sort == 'oldest_update'
+          div.menu
+            = link_to issues_path(status: @status), class: 'item'
+              = semantic_icon :sort, :attributes, :descending
+              | 最新
+            = link_to issues_path(sort: 'oldest', status: @status), class: 'item'
+              = semantic_icon :sort, :attributes, :ascending
+              | 最舊
+            = link_to issues_path(sort: 'newest_update', status: @status), class: 'item'
+              = semantic_icon :sort, :attributes, :descending
+              | 最近動態
+            = link_to issues_path(sort: 'oldest_update', status: @status), class: 'item'
+              = semantic_icon :sort, :attributes, :ascending
+              | 最早動態
       - if can? :create, Issue
         div.ui.floated.right.small.buttons
           = link_to new_issue_path, class: 'ui green button' do
