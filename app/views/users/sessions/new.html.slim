@@ -18,11 +18,11 @@ div.ui.piled.segment
       = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
         div.ui.form
           div.field
-            = f.label :email
-              | E-mail
+            = f.label :username
+              | 帳號 或 E-mail
             div.ui.left.labeled.icon.input
-              = f.email_field :email, autofocus: true
-              = semantic_icon :mail
+              = f.text_field :username, autofocus: true
+              = semantic_icon :user
               div.ui.corner.label
                 = semantic_icon :asterisk
           div.field
