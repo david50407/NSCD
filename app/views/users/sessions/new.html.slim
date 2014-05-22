@@ -1,12 +1,12 @@
 div.ui.basic.segment
-div.ui.piled.segment
+div.ui.relaxed.piled.segment
   div.ui.basic.segment
   h2.ui.center.aligned.header
     | NSCD
   h4.ui.center.aligned.disabled.header
     | Need Some Cool Description
   div.ui.section.divider
-  div.ui.two.column.divided.grid
+  div.ui.two.column.stackable.divided.grid
     div.column
       div.ui.floating.blue.message
         | 歡迎來到 NSCD 活動管理系統
@@ -41,4 +41,4 @@ div.ui.piled.segment
                   | 記住我（請勿在公用電腦啓用）
           = f.submit "登入", class: "ui blue submit button"
           = render "users/shared/links"
-  div.ui.basic.segment
+      div.ui.basic.segment
