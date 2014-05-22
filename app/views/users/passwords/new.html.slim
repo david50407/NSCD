@@ -13,41 +13,31 @@ div.ui.relaxed.piled.segment
         | 歡迎來到 NSCD 活動管理系統
       div.ui.floating.yellow.message
         = semantic_icon :info, :letter
-        | 進行任何操作之前請先登入
+        | 若無法重設密碼，請聯絡管理員
       - if @error
         div.ui.floating.red.message
           = semantic_icon :exclamation
           = @error
-      - if flash[:info]
-        div.ui.floating.green.message
-          = semantic_icon :info, :letter
-          = flash[:info]
     div.column
       h2.ui.center.aligned.header
-        | 登入
-      = semantic_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-        div.field class=('error' if @error)
+        | 重設密碼
+      = semantic_form_for resource, as: resource_name, url: password_path(resource_name), :method => :post do |f|
+        div.field class=('error' if @mark_error)
           = f.label :username
-            | 帳號 或 E-mail
+            | 帳號
           div.ui.left.labeled.icon.input
             = f.text_field :username, autofocus: true
             = semantic_icon :user
             div.ui.corner.label
               = semantic_icon :asterisk
-        div.field class=('error' if @error)
-          = f.label :password
-            | 密碼
+        div.field class=('error' if @mark_error)
+          = f.label :email
+            | E-mail
           div.ui.left.labeled.icon.input
-            = f.password_field :password
-            = semantic_icon :lock
+            = f.text_field :email
+            = semantic_icon :mail
             div.ui.corner.label
               = semantic_icon :asterisk
-        - if devise_mapping.rememberable?
-          div.inline.field
-            div.ui.toggle.checkbox
-              = f.check_box :remember_me
-              = f.label :remember_me
-                | 記住我（請勿在公用電腦啓用）
-        = f.submit "登入", class: "ui blue submit button"
+        = f.submit "寄送重設訊息", class: "ui red submit button"
         = render "users/shared/links"
       div.ui.basic.segment
