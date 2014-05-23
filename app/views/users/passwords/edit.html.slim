@@ -1,0 +1,44 @@
+div.ui.basic.segment
+div.ui.relaxed.piled.segment
+  div.ui.basic.segment
+  h2.ui.center.aligned.header
+    | NSCD
+  h4.ui.center.aligned.disabled.header
+    | Need Some Cool Description
+  div.ui.section.divider
+  div.ui.two.column.stackable.divided.grid
+    div.column
+      div.ui.floating.blue.message
+        = semantic_icon :comment
+        | 歡迎來到 NSCD 活動管理系統
+      div.ui.floating.yellow.message
+        = semantic_icon :info, :letter
+        | 若無法重設密碼，請聯絡管理員
+      - if @error
+        div.ui.floating.red.message
+          = semantic_icon :exclamation
+          = @error
+    div.column
+      h2.ui.center.aligned.header
+        | 重設密碼
+      = semantic_form_for resource, as: resource_name, url: password_path(resource_name), :method => :put do |f|
+        div.field class=('error' if @mark_error)
+          = f.label :password
+            | 新密碼
+          div.ui.left.labeled.icon.input
+            = f.password_field :password, autofocus: true, autocomplete: "off"
+            = semantic_icon :lock
+            div.ui.corner.label
+              = semantic_icon :asterisk
+        div.field class=('error' if @mark_error)
+          = f.label :password_confirmation
+            | 確認密碼
+          div.ui.left.labeled.icon.input
+            = f.password_field :password_confirmation, autocomplete: "off"
+            = semantic_icon :lock
+            div.ui.corner.label
+              = semantic_icon :asterisk
+        = f.hidden_field :reset_password_token
+        = f.submit "重設密碼", class: "ui red submit button"
+        = render "users/shared/links"
+      div.ui.basic.segment
