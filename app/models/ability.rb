@@ -29,11 +29,19 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+		basic_readonly
 		if user.blank?
 			cannot :manage, :all
 			# basic_readonly
 		else
-			can :manage, :all
+			can [:read, :create], [Issue, Issue::Comment]
+			can [:modify, :open, :close], Issue do |issue|
+				!!(current_user.permissions.find_by uuid: 'nscd.issues.manage' || issue.creator_id == current_user.id)
+			end
+			can :read, User
+			can :manage, User do |user|
+				!!(current_user.permissions.find_by uuid: 'nscd.users.manage' || user.id == current_user.id)
+			end
 		end
   end
 

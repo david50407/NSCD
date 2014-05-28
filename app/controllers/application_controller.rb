@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 	before_filter :configure_permitted_parameters, if: :devise_controller?
 
 	rescue_from CanCan::AccessDenied do |exception|
+		Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
 		if current_user.blank?
 			redirect_to new_user_session_url, :alert => exception.message
 		else

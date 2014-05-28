@@ -29,6 +29,13 @@ NSCD::Application.routes.draw do
 		end
 	end
 
+	resources :settings do
+		collection do
+			get   'profile'
+			patch 'profile', :action => 'profile_update'
+		end
+	end
+
   # Example resource route with options:
   #   resources :products do
   #     member do

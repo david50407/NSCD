@@ -1,0 +1,50 @@
+div.ui.grid
+  - if flash[:success]
+    div.sixteen.wide.column
+      div.ui.success.message
+        div.header
+          = flash[:success]
+  div.four.wide.column
+    = render :partial => 'menu'
+  div.twelve.wide.column
+    div.ui.basic.segment
+      = form_for @user, url: profile_settings_path do |f|
+        div.ui.form
+          div.field
+            label
+              | 使用者頭像
+            = image_tag '//placehold.it/48'
+          div.field
+            = f.label :username
+              | 帳號
+            div.ui.left.labeled.icon.input
+              = semantic_icon :user
+              = f.text_field :username, readonly: 'readonly'
+              div.ui.corner.label
+                = semantic_icon :lock
+          div.ui.two.fields
+            div.field
+              = f.label :lastname
+                | 姓
+              div.ui.left.labeled.icon.input
+                = semantic_icon :half, :empty, :star
+                = f.text_field :lastname
+            div.field
+              = f.label :firstname
+                | 名
+              div.ui.left.labeled.icon.input
+                = semantic_icon :horizontally, :flipped, :half, :empty, :star
+                = f.text_field :firstname
+          div.field
+            = f.label :nickname
+              | 暱稱
+            div.ui.left.labeled.icon.input
+              = semantic_icon :user
+              = f.text_field :nickname
+          div.field
+            = f.label :phone
+              | 電話號碼
+            div.ui.left.labeled.icon.input
+              = semantic_icon :phone
+              = f.text_field :phone
+          = f.submit '確定修改', class: 'ui blue submit button'

@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 	has_many :issues
 	has_many :issue_comments
 
+	attr_reader :fullname
+
 	validates :username, uniqueness: { case_sensitive: false }
 
 	def self.find_first_by_auth_conditions(warden_conditions)
@@ -22,5 +24,9 @@ class User < ActiveRecord::Base
 			self.where(conditions)
 			    .first
 		end
+	end
+
+	def fullname
+		lastname.to_s + firstname.to_s
 	end
 end

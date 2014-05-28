@@ -1,0 +1,7 @@
+div.ui.secondary.vertical.pointing.menu
+  = link_to profile_settings_path, class: 'item' << actived?(params[:action] == 'profile')
+    = semantic_icon :user
+    | 個人檔案
+  a.item
+    = semantic_icon :setting
+    | 帳號設定

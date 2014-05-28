@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20140522072020) do
 
   create_table "user_permissions", force: true do |t|
     t.integer  "user_id"
-    t.string   "name"
+    t.string   "uuid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
