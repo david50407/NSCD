@@ -13,7 +13,7 @@ div.ui.grid
             | 已結案
         = @issue.title
       img.ui.tiny.avatar.image src='http://placehold.it/32'
-      = @issue.creator.email
+      = @issue.creator.displayname
       |  建立於 #{timeago_tag @issue.created_at, :format => :short}
   div.twelve.wide.column
     div.ui.comments
@@ -24,7 +24,7 @@ div.ui.grid
               img src='http://placehold.it/32'
             div.content
               a.author
-                = comment.author.email
+                = comment.author.displayname
               div.metadata
                 = timeago_tag comment.created_at, :format => :short
               div.text
@@ -34,13 +34,13 @@ div.ui.grid
           div.ui.tiny.inverted.red.block.header
             img.ui.tiny.avatar.image src='http://placehold.it/32'
             a.author
-              = comment.author.email
+              = comment.author.displayname
             |  於#{timeago_tag comment.created_at, :format => :short}翻案
         - else
           div.ui.tiny.inverted.green.block.header
             img.ui.tiny.avatar.image src='http://placehold.it/32'
             a.author
-              = comment.author.email
+              = comment.author.displayname
             |  於#{timeago_tag comment.created_at, :format => :short}結案
       - if can? :create, Issue::Comment
         = render :partial => 'comment'

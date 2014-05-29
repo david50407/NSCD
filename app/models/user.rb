@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 	has_many :issue_comments
 
 	attr_reader :fullname
+	attr_reader :displayname
 
 	validates :username, uniqueness: { case_sensitive: false }
 
@@ -28,5 +29,9 @@ class User < ActiveRecord::Base
 
 	def fullname
 		lastname.to_s + firstname.to_s
+	end
+
+	def displayname
+		nickname.presence || fullname.presence || username.presence || email
 	end
 end

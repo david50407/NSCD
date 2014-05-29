@@ -4,7 +4,7 @@ div.comment.ui.form
   div.content
     = form_for Issue::Comment.new, url: issue_comments_path(@issue) do |f|
       a.author
-        = current_user.email
+        = current_user.displayname
       div.text
         = f.text_area :content, placeholder: '回應……'
       = f.submit '送出', class: 'ui floated right small blue submit button'

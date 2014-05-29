@@ -10,7 +10,7 @@
             div.ui.corner.label
               = semantic_icon :asterisk
         img.ui.tiny.avatar.image src='http://placehold.it/32'
-        = @issue.creator.email
+        = @issue.creator.displayname
         |  建立於 現在
     div.twelve.wide.column
       div.ui.form.comments
@@ -19,7 +19,7 @@
             img src='http://placehold.it/32'
           div.content
             a.author
-              = @issue.creator.email
+              = @issue.creator.displayname
             div.text
               = f.fields_for :comment do |comment|
                 = comment.text_area :content, placeholder: '詳細說明……'

@@ -15,7 +15,7 @@ div.ui.menu.blue.inverted.pointing.fixed
         - else
           div.item.ui.simple.dropdown
             = semantic_icon :user
-            = current_user.nickname.presence || current_user.fullname.presence || current_user.username.presence || current_user.email
+            = current_user.displayname
             = semantic_icon :dropdown
             div.menu
               = link_to settings_path, class: 'item'

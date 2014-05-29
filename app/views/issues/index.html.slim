@@ -61,6 +61,6 @@ div.ui.grid
                 div.text
                   | ##{issue.id}
               div.description.ui.font.small
-                = issue.creator.email
+                = issue.creator.displayname
                 |  建立於 #{timeago_tag issue.created_at, :format => :short}
     = paginate @issues
