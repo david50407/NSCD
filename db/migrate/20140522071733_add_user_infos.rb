@@ -8,6 +8,10 @@ class AddUserInfos < ActiveRecord::Migration
 			t.string :phone, default: ""
 
 		end
+		User.all.map do |u|
+			u.username = u.email
+			u.save
+		end
 		add_index :users, :username, :unique => true
   end
 end
